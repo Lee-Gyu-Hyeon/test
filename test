@@ -1,0 +1,321 @@
+import UIKit
+import SnapKit
+
+class FollowtheOriginalViewController: UIViewController {
+    
+    
+    //
+    fileprivate let cellId = "cellId"
+    private var numberOfItemsInRow = 3
+    private var minimumSpacing = 0
+    private var edgeInsetPadding = 0
+    
+    //
+    let cellName = "collectionViewCell1"
+    
+    let collection2View: UICollectionView = {
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        //layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
+        collectionView.collectionViewLayout = layout
+        collectionView.backgroundColor = .white
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        //collectionView.contentInsetAdjustmentBehavior = .always
+        //collectionView.contentInsetAdjustmentBehavior = .never
+        
+        collectionView.register(VideoListCell.self, forCellWithReuseIdentifier: "cellId")
+        //collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        return collectionView
+    }()
+    //
+    
+    //
+    let scrollView = UIScrollView()
+    let contentView = UIView()
+    
+    let infoView = UIView()
+    let singerthumbnailImage = UIImageView()
+    let coverdancetitleLabel = UILabel()
+    let useraccountLabel = UILabel()
+    let videocountLabel = UILabel()
+    let likebutton = UIButton()
+    let dancefollowButton = UIButton()
+    
+    let view1 = UIView()
+    let view2 = UIView()
+    let view3 = UIView()
+    //
+    
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = "따라하기"
+        
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"img_btn_followdance_share"), style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem?.tintColor = .black
+        
+        
+        
+        
+        
+        //
+        //scrollView.isScrollEnabled = true
+        scrollView.backgroundColor = UIColor.white
+        
+        //scrollView.contentInsetAdjustmentBehavior = .never
+        //scrollView.contentInsetAdjustmentBehavior = .always
+        //scrollView.showsVerticalScrollIndicator = false
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: view.safeAreaInsets.bottom, right: 0)
+        
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+            //make.edges.equalTo(self.view)
+            //make.edges.equalTo(0)
+        }
+        
+        
+        scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints { (make) in
+            make.width.equalToSuperview()
+            make.centerX.top.bottom.equalToSuperview()
+        }
+        //
+        
+        
+        
+        
+        
+        
+        
+        
+        //
+        self.contentView.addSubview(infoView)
+        self.contentView.addSubview(singerthumbnailImage)
+        self.contentView.addSubview(coverdancetitleLabel)
+        self.contentView.addSubview(useraccountLabel)
+        self.contentView.addSubview(videocountLabel)
+        self.contentView.addSubview(likebutton)
+        self.contentView.addSubview(dancefollowButton)
+        
+        self.contentView.addSubview(collection2View)
+        
+        self.contentView.addSubview(view1)
+        self.contentView.addSubview(view2)
+        self.contentView.addSubview(view3)
+        //
+        
+        
+        
+        
+        
+        
+        
+        //
+        infoView.backgroundColor = UIColor.white
+        infoView.layer.borderWidth = 1
+        infoView.layer.borderColor = UIColor.gray.cgColor
+        
+        infoView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.height.equalTo(140)
+        }
+        
+        
+        
+        //
+        singerthumbnailImage.image = UIImage(named: "img_thumbnail_singger_followtheoriginal")
+        singerthumbnailImage.layer.borderColor = UIColor.gray.cgColor
+        singerthumbnailImage.layer.borderWidth = 1
+        infoView.addSubview(singerthumbnailImage)
+        
+        singerthumbnailImage.snp.makeConstraints { (make) in
+            make.leading.equalTo(11)
+            make.top.equalTo(15)
+        }
+        
+        
+        
+        coverdancetitleLabel.text = "청하 커버댄스"
+        coverdancetitleLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        coverdancetitleLabel.textColor = UIColor.black
+        infoView.addSubview(coverdancetitleLabel)
+        
+        coverdancetitleLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(singerthumbnailImage.snp.trailing).offset(13)
+            make.top.equalTo(15)
+        }
+        
+        
+        
+        useraccountLabel.text = "@Chungha55"
+        useraccountLabel.font = UIFont.systemFont(ofSize: 13)
+        useraccountLabel.textColor = UIColor(red: 120/255, green: 120/255, blue: 120/255, alpha: 1.0)
+        infoView.addSubview(useraccountLabel)
+        
+        useraccountLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(singerthumbnailImage.snp.trailing).offset(13)
+            make.top.equalTo(coverdancetitleLabel.snp.bottom).offset(7)
+        }
+        
+        
+        
+        videocountLabel.text = "1867 동영상"
+        videocountLabel.font = UIFont.systemFont(ofSize: 13)
+        videocountLabel.textColor = UIColor(red: 120/255, green: 120/255, blue: 120/255, alpha: 1.0)
+        infoView.addSubview(videocountLabel)
+        
+        videocountLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(singerthumbnailImage.snp.trailing).offset(13)
+            make.top.equalTo(useraccountLabel.snp.bottom).offset(7)
+        }
+        
+        
+        likebutton.setImage(UIImage(named: "img_followdance_dancer_favorites"), for: .normal)
+        likebutton.layer.borderWidth = 1
+        likebutton.layer.borderColor = UIColor.gray.cgColor
+
+        likebutton.snp.makeConstraints { (make) in
+            make.width.equalTo(30)
+            make.height.equalTo(30)
+            make.leading.equalTo(singerthumbnailImage.snp.trailing).offset(13)
+            make.top.equalTo(videocountLabel.snp.bottom).offset(20)
+        }
+        
+        
+        
+        dancefollowButton.setImage(UIImage(named: "img_followdance_dancer_follow"), for: .normal)
+        dancefollowButton.setTitle("따라하기", for: .normal)
+        dancefollowButton.layer.borderWidth = 1
+        dancefollowButton.layer.borderColor = UIColor.gray.cgColor
+        dancefollowButton.setTitleColor(UIColor.black, for: .normal)
+        dancefollowButton.backgroundColor = UIColor.white
+        dancefollowButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        dancefollowButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        
+        dancefollowButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 2)
+        dancefollowButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -2)
+        dancefollowButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 0)
+            
+        dancefollowButton.snp.makeConstraints { (make) in
+            make.width.equalTo(105)
+            make.height.equalTo(30)
+            make.leading.equalTo(likebutton.snp.trailing).offset(5)
+            make.top.equalTo(videocountLabel.snp.bottom).offset(20)
+        }
+        //
+        
+        
+        
+        
+        //
+        collection2View.backgroundColor = UIColor.white
+        collection2View.snp.makeConstraints { (make) in
+            make.top.equalTo(infoView.snp.bottom)
+            make.left.right.equalTo(0)
+            make.height.equalTo(1000)
+        }
+        //
+        
+        
+        
+        
+        //
+        //view1.backgroundColor = .red
+        view1.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(collection2View.snp.bottom)
+            //make.height.equalTo(300)
+        }
+
+        //view2.backgroundColor = .black
+        view2.snp.makeConstraints { (make) in
+            make.top.equalTo(view1.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            //make.height.equalTo(300)
+        }
+        
+        //view3.backgroundColor = .blue
+        view3.snp.makeConstraints { (make) in
+            make.top.equalTo(view2.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            //make.height.equalTo(300)
+        }
+        //
+        
+        
+        
+        
+        //
+        self.initCollectionView()
+        
+    }
+    
+   
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        infoView.layer.addBorder([.top, .bottom], color: UIColor(red: 112/255, green: 112/255, blue: 112/255, alpha: 1.0), width: 1)
+    }
+}
+
+
+extension FollowtheOriginalViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoListCell
+        cell.backgroundColor = UIColor.white
+        cell.frame.size.width = UIScreen.main.bounds.width/3
+        cell.frame.size.height = UIScreen.main.bounds.width/3
+        return cell
+    }
+    
+    public func initCollectionView() {
+        self.collection2View.dataSource = self
+        self.collection2View.delegate = self
+        self.collection2View.register(VideoListCell.self, forCellWithReuseIdentifier: self.cellName)
+        //self.collection2View.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //self.collection2View.scrollIndicatorInsets = UIEdgeInsets.zero
+        //self.collection2View.isScrollEnabled = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let noOfCellsInRow = 3
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        let totalSpace = flowLayout.sectionInset.left + flowLayout.sectionInset.right + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
+
+        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
+        return CGSize(width: size, height: size)
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 10
+    }
+    
+    /*
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 40, left: 0, bottom: 60, right: 0)
+    }
+    */
+}
